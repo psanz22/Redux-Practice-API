@@ -6,6 +6,7 @@ import { User } from './entity/user.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
+      //forRoot configura la conexión global a la db, se usa una vez en AppModule
       type: 'postgres',
       host: 'db', //nombre del servicio en docker compose
       port: 5432,
@@ -15,6 +16,7 @@ import { User } from './entity/user.entity';
       entities: [User],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([User]), //expone los repositorios de esas entidades dentro del módulo actual, haciendo disponible el repositorio de User. Hay que usarlo en cada módulo que lo necesite.
   ],
   controllers: [UserController],
   providers: [UserService],

@@ -5,3 +5,6 @@ dev:
 
 i:
 	npm install
+
+api:
+	docker exec -it redux-practice-api-1 sh
