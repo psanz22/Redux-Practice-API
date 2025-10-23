@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Put, Delete, Body, Post } from '@nestjs/common';
 import { UserService } from './app.service';
 import { User } from './entity/user.entity';
 
@@ -10,6 +10,11 @@ export class UserController {
   @Get()
   getUser(): Promise<User | null> {
     return this.userService.getUser();
+  }
+
+  @Post()
+  createUser(@Body() userData: Partial<User>): Promise<User> {
+    return this.userService.saveUser(userData);
   }
 
   @Put()

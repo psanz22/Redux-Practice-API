@@ -45,6 +45,11 @@ export class UserService {
     return this.userRepo.findOne({ where: {} }); //le pasamos un objeto vacío porque solo tenemos un usuario, pero necesita que le pasemos un argumento
   }
 
+  async createUser(userData: Partial<User>): Promise<User> {
+    const user = this.userRepo.create(userData);
+    return this.userRepo.save(user);
+  }
+
   async updateUser(userData: Partial<User>): Promise<User> {
     const existing = await this.userRepo.findOne({ where: {} });
     if (!existing) {
